@@ -65,7 +65,8 @@ $(document).ready(function(){
 		var mxnget_cell_b = $("<b/>");
 		var actrate_row = $("<tr/>",{'class':"card_row"});
 		var actrate_label = $("<td/>",{'class':"card_cell"});
-		var actrate_label_h3 = $("<h3/>").text("Tipo de cambio efectivo (entre más alto mejor)");
+		var breakline = $("<br/>");
+		var actrate_label_h3 = $("<h3/>").text("Tipo de cambio efectivo").append(breakline).append("(entre más alto mejor)");
 		var actrate_cell = $("<td/>",{'class':"card_cell"});
 		var actrate_cell_h3 = $("<h3/>");
 		var actrate_cell_b = $("<b/>");
