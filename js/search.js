@@ -26,17 +26,17 @@ $(document).ready(function(){
 	}
 
 
-	var confirmListener = function(id){
+	var confirmListener = function(){
 		amount_send = $("#amount_send").val();
 		if(! $.isNumeric(amount_send) || amount_send <= 0){
-			$('html,body').animate({scrollTop:$("#banner").offset().top},800);
+			$('html,body').animate({scrollTop:$("#banner").offset().top-55},800);
 			alert("Ingrese un número positivo en el campo 'Cantidad' antes de configurar opciones");
 			return false;
 		}
 
-		var name = $("#"+id+"_name").val();
-		var fee = $("#"+id+"_fee").val();
-		var rate = $("#"+id+"_rate").val();
+		var name = $("#nombre").val();
+		var fee = $("#fee").val();
+		var rate = $("#rate").val();
 
 		if(!name){
 			alert("Introduzca un nombre de opción");
@@ -93,64 +93,89 @@ $(document).ready(function(){
 
 		orderCard.sort(sortFunction);
 		
+		//[20170731 Chun] Do not use add card
+		// var addcard = $("<div/>",{'class': "mix col-md-4 col-sm-4 col-xs-12 card addcard category-1"}).click(function(){
+		// 	addcardListener();
+		// });
 
-		var addcard = $("<div/>",{'class': "mix col-md-4 col-sm-4 col-xs-12 card addcard category-1"}).click(function(){
-			addcardListener();
-		});
-
-		container.mixItUp('insert',0, addcard, {filter: "all"});
+		// container.mixItUp('insert',0, addcard, {filter: "all"});
 
 		for(var i = 1; i <= orderCard.length; i++){
 			container.mixItUp('insert',i ,orderCard[i-1][1], {filter: "all"});
 		}
 
+		//[20170731 Chun]clear the input text after click confirm button
+		$("#nombre").val("");
+		$("#fee").val("");
+		$("#rate").val("");
+		$("#nombre").focus();
+		$('#collapse2').collapse('hide');
+		$('#collapse3').collapse('hide');
+
 	}
 
-	var addcardListener = function(){
-		var id = index;
+	//[20170731 Chun] Do not use add card
+	// var addcardListener = function(){
+	// 	var id = index;
 
-		var card = $("<div/>",{'class': "filimg mix col-md-4 col-sm-4 col-xs-12 card category-1", 'id':id+"_card"});
-		var cardTable = $("<table/>",{'class':"card_table"});
-		var name_row = $("<tr/>",{'class':"card_row"});
-		var name_label = $("<td/>",{'class':"card_cell"}).text("Nombre de la Empresa");
-		var name_cell = $("<td/>",{'class':"card_cell"});
-		var name_input = $("<input/>",{'type':"text",'id':id+"_name",'placeholder':"Nombre de la Empresa"});
-		name_cell.append(name_input);
-		name_row.append(name_label).append(name_cell);
+	// 	var card = $("<div/>",{'class': "filimg mix col-md-4 col-sm-4 col-xs-12 card category-1", 'id':id+"_card"});
+	// 	var cardTable = $("<table/>",{'class':"card_table"});
+	// 	var name_row = $("<tr/>",{'class':"card_row"});
+	// 	var name_label = $("<td/>",{'class':"card_cell"}).text("Nombre de la Empresa");
+	// 	var name_cell = $("<td/>",{'class':"card_cell"});
+	// 	var name_input = $("<input/>",{'type':"text",'id':id+"_name",'placeholder':"Nombre de la Empresa"});
+	// 	name_cell.append(name_input);
+	// 	name_row.append(name_label).append(name_cell);
 
-		var fee_row = $("<tr/>",{'class':"card_row"});
-		var fee_label = $("<td/>",{'class':"card_cell"}).text("Comisión");
-		var fee_cell = $("<td/>",{'class':"card_cell"});
-		var fee_input = $("<input/>",{'type':"text",'id':id+"_fee",'placeholder':"USD"});
-		fee_cell.append(fee_input);
-		fee_row.append(fee_label).append(fee_cell);
+	// 	var fee_row = $("<tr/>",{'class':"card_row"});
+	// 	var fee_label = $("<td/>",{'class':"card_cell"}).text("Comisión");
+	// 	var fee_cell = $("<td/>",{'class':"card_cell"});
+	// 	var fee_input = $("<input/>",{'type':"text",'id':id+"_fee",'placeholder':"USD"});
+	// 	fee_cell.append(fee_input);
+	// 	fee_row.append(fee_label).append(fee_cell);
 
-		var rate_row = $("<tr/>",{'class':"card_row"});
-		var rate_label = $("<td/>",{'class':"card_cell"}).text("Tipo de Cambio");
-		var rate_cell = $("<td/>",{'class':"card_cell"});
-		var rate_input = $("<input/>",{'type':"text",'id':id+"_rate",'placeholder':"1 USD = ? MXN"});
-		rate_cell.append(rate_input);
-		rate_row.append(rate_label).append(rate_cell)
+	// 	var rate_row = $("<tr/>",{'class':"card_row"});
+	// 	var rate_label = $("<td/>",{'class':"card_cell"}).text("Tipo de Cambio");
+	// 	var rate_cell = $("<td/>",{'class':"card_cell"});
+	// 	var rate_input = $("<input/>",{'type':"text",'id':id+"_rate",'placeholder':"1 USD = ? MXN"});
+	// 	rate_cell.append(rate_input);
+	// 	rate_row.append(rate_label).append(rate_cell)
 
-		cardTable.append(name_row).append(fee_row).append(rate_row);
+	// 	cardTable.append(name_row).append(fee_row).append(rate_row);
 
-		var confirm_button = $("<button/>",{'id':index+"_confirm"}).text("Calcular").click(function(){
-			confirmListener(id);
-		});
+	// 	var confirm_button = $("<button/>",{'id':index+"_confirm"}).text("Calcular").click(function(){
+	// 		confirmListener(id);
+	// 	});
 		
-		card.append(cardTable).append(confirm_button);
-		$(".addcard").remove();
+	// 	card.append(cardTable).append(confirm_button);
+	// 	$(".addcard").remove();
 
-		 $("#Container").mixItUp('insert',0 ,card, {filter: "all"});
-		index++;
-	}
+	// 	 $("#Container").mixItUp('insert',0 ,card, {filter: "all"});
+	// 	index++;
+	// }
+
+	$("#confirm").click(function(){
+		confirmListener();
+	});
 
 	$(".addcard").click(function(){
 		addcardListener();
 	});
 
+	$("#name_next").click(function(){
+		$('#collapse2').collapse('show');
+		$("#fee").focus();
+	});
+
+	$("#fee_next").click(function(){
+		$('#collapse3').collapse('show');
+		$("#rate").focus();
+	});
+
 	$("#search").click(function(){
 		$('html,body').animate({scrollTop:$("#table").offset().top},800);
+		$('#collapse1').collapse('show');
+		$("#nombre").focus();
 	})
 });
 
